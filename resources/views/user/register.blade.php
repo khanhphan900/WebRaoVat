@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.mainLogin')
 
 @section('title')
     Đăng ký

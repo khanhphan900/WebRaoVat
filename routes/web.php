@@ -1,4 +1,6 @@
 <?php
+use App\User;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('home','HomeController');
 
 // Route::resource('register','UserController');
 Route::get('register','UserController@create');
@@ -21,5 +24,10 @@ Route::get('register','UserController@create');
 Route::post('register','UserController@store');
 
 Route::get('login',function(){
-    return view('login');
+    return view('user/login');
+});
+Route::post('login',function(Request $request){
+    if(User::check_login($request->user_input,md5(sha1($request->password))))
+        return 'Đăng nhập thành công';
+    else return 'Đăng nhập thất bại';
 });
